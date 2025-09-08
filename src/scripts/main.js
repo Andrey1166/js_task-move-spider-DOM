@@ -6,19 +6,18 @@ const spider = document.querySelector('.spider');
 wall.addEventListener('click', (e) => {
   const wallCoords = wall.getBoundingClientRect();
 
-  let coordY = e.clientY - wallCoords.top - wall.clientTop;
-  let coordX = e.clientX - wallCoords.left - wall.clientLeft;
+  let coordX =
+    e.clientX - wallCoords.left - spider.clientWidth / 2 - wall.clientLeft;
+  let coordY =
+    e.clientY - wallCoords.top - spider.clientHeight / 2 - wall.clientTop;
 
-  coordX = Math.max(
-    spider.clientWidth / 2,
-    Math.min(coordX, wall.clientWidth - spider.clientWidth / 2),
-  );
+  coordX = Math.max(0, Math.min(coordX, wall.clientWidth - spider.clientWidth));
 
   coordY = Math.max(
-    spider.clientHeight / 2,
-    Math.min(coordY, wall.clientHeight - spider.clientHeight / 2),
+    0,
+    Math.min(coordY, wall.clientHeight - spider.clientHeight),
   );
 
-  spider.style.top = coordY - spider.clientHeight / 2 + 'px';
-  spider.style.left = coordX - spider.clientWidth / 2 + 'px';
+  spider.style.left = coordX + 'px';
+  spider.style.top = coordY + 'px';
 });
